@@ -5,6 +5,8 @@ Design a search API that returns cooking presets based on the ingredients select
 
 ## Demo
 
+## Project Structure
+
 ## Solution Overview
 The design includes
     
@@ -107,7 +109,21 @@ GET /cooking-presets?category=Meat&sub_category=Beef
 ```
 
 ### Reasons
-Why Dynamo vs Graph
-Why API Cache
+**DynamoDB vs Graph DB**
+A problem related to hierarchical/tree based search can be solved using a Graph model. A node at each level comprises of the various ingredients. Ex: Categories at level 1, Sub Categories at level 2 and so on. But graph databases do not scale massively at a low cost. Graph DBs are cost effective to solve problems involving complex relationships. Hence, I have chosen a hierarchical model built on DynamoDB. DynamoDB returns results with sub millisecond latency which is critical in a search feature like the current problem. DynamoDB helps both as as storage engine and search engine
 
-### Alternatives
+**API Caching**
+The search page is often a highly visited page, hence caching is required. The current solution caches the list of categories and the results defaulted to 'Grains' category in the ephemeral lambda storage but in real-time it will be cached on the API Gateway cache response. 
+
+**Search Index**
+The search index is designed to save the hierarchical/tree nature of the ingredients in the sort key. A search request from the client hits the partition key(category) first and then based on the search params it hits the sort keys that match the search params. The search critieria is recursively populated with the next node in the hierarchy along with the matched cooking preset results.
+
+**Response structure**
+The response for search has two keys
+
+1. search_params
+2. results
+
+The `search_params` contain the grouped ingredients based on the user selection. Ex: If the user searches for a category Meat then the search_params will contain the sub_category key with Beef and Meat Products. 
+
+The `results` contain the cooking presets that match the search criteria. Returning the results for each level of search helps to build richer clients where users keep seeing the data continuously. 
