@@ -4,7 +4,8 @@
 Design a search API that returns cooking presets based on the ingredients selected by a user
 
 ## Demo
-https://680tktblrd.execute-api.us-east-1.amazonaws.com/demo/cooking-presets?category=Vegetables&sub_category=Potatoes&type=Russet Potato&bone_in=-&prep=Whole&freshness=Fresh&amount=2 lb&cooking_method=Pressure Cook
+[Live URL](https://680tktblrd.execute-api.us-east-1.amazonaws.com/demo/cooking-presets?category=Vegetables&sub_category=Potatoes&type=Russet Potato&bone_in=-&prep=Whole&freshness=Fresh&amount=2 lb&cooking_method=Pressure Cook)
+
 
 ## Project Structure
 - `lambda_function.py` contains the Python Lambda code for the REST API
