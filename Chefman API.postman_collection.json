@@ -1,0 +1,87 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Chefman API",
+		"_postman_id": "b31d335d-3223-ae8c-1e36-266709b26347",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SEARCH PRESETS",
+			"request": {
+				"url": {
+					"raw": "https://680tktblrd.execute-api.us-east-1.amazonaws.com/demo/cooking-presets?category=Vegetables&sub_category=Potatoes&type=Russet Potato&bone_in=-&prep=Whole&freshness=Fresh&amount=2 lb&cooking_method=Pressure Cook",
+					"protocol": "https",
+					"host": [
+						"680tktblrd",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"demo",
+						"cooking-presets"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "Vegetables",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "sub_category",
+							"value": "Potatoes",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "type",
+							"value": "Russet Potato",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "bone_in",
+							"value": "-",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "prep",
+							"value": "Whole",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "freshness",
+							"value": "Fresh",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "amount",
+							"value": "2 lb",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "cooking_method",
+							"value": "Pressure Cook",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
