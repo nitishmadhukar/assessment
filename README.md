@@ -28,10 +28,86 @@ The design includes
 - DynamoDB: Is the primary data source to store the ingredients and cooking presets along with a search index. 
 
 ### Data Model
+DynamoDB provides the advantage of schemaless storage helping in scaling the data source without any migration downtimes
+
+The data model has two facets
+
+1. Data Store: Stores the ingredients and cooking presets
+2. Search Index: Saves the search index comprising of all the ingredients
+
+DynamoDB uses two keys as identifiers
+
+1. Partition Key: Category of ingredients which is the primary group for any item is used as a partition key. Ex: `Vegetables`
+2. Sort Key: All the ingredients are used as a composite key to build the sort key. This design helps in hierarchical searches. Ex: `Poultry#Chicken Breast#Bone-In#1 lb#Pressure Cook`
+
+The cooking presets are stored as key-value pairs
 
 ### API
-API request/response
+The API is powered by a REST interface that is deployed on an AWS API Gateway. 
+
+The API has a `POST` endpoint to create data and a `GET` endpoint to retrieve data.
+
+
+**Save Cooking Presets**
+```
+# Request
+POST /cooking-presets
+-d 
+ {
+    "category": "test",
+    "sub_category": "test",
+    "type": "test",
+    "bone_in": "test",
+    "prep": "test",
+    "freshness": "test",
+    "amount": "test",
+    "cooking_method": "test",
+    "liquid_amount": "test",
+    "pressure_level": "test",
+    "estimated_pressure_build_time": "test",
+    "temperature": "test",
+    "cook_time": "test",
+    "photo": "test"
+  }
+```
+
+**Search Cooking Presets**
+```
+# Request
+GET /cooking-presets?category=Meat&sub_category=Beef
+
+# Response
+{
+    "search_params": {
+        "search_params": {
+            "category": [
+                "Grains",
+                "Legumes",
+                "Meat",
+                "Poultry",
+                "Vegetables"
+            ],
+            "sub_category": [
+                "Potatoes"
+            ],
+            "type": [
+                "Russet Potato",
+                "Red Potato",
+                "Sweet Potato"
+            ],
+            "bone_in": [],
+            "prep": [],
+            "freshness": [],
+            "amount": [],
+            "cooking_method": []
+        }
+    },
+    "results": [...]
+}
+```
 
 ### Reasons
+Why Dynamo vs Graph
+Why API Cache
 
 ### Alternatives
